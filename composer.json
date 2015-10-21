@@ -1,0 +1,21 @@
+{
+    "name": "qycloud/ant_utils",
+    "description":"some utils",
+    "keywords":["utils"],
+    "type":"library",
+    "license":"MIT",
+    "authors":[
+        {
+            "name":"Mtao",
+            "email": "jmtao33@gmail.com",
+            "homepage":"https://www.qycloud.com.cn"
+        }
+    ],
+    "homepage": "http://github.com/qycloud/ant_utils",
+    "require":{
+        "php":">=5.3.9"
+    },
+    "autoload": {
+        "psr-0": { "ant_utils": "src/" }
+    }
+}
