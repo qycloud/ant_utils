@@ -55,7 +55,7 @@ class A_y
 
     public static function init()
     {
-        if (A_y::$_init) {
+        if (self::$_init) {
             return;
         }
 
@@ -75,7 +75,7 @@ class A_y
         $ext = ($ext === NULL) ? EXT : '.'.$ext;
         $path = $dir.DIRECTORY_SEPARATOR.$file.$ext;
         if ($array OR $dir === 'config' OR $dir === 'i18n') {
-            $paths = A_y::$_paths;
+            $paths = self::$_paths;
             $found = array();
             foreach ($paths as $dir) {
                 if (is_file($dir.$path)) {
@@ -84,7 +84,7 @@ class A_y
             }
         } else {
             $found = FALSE;
-            foreach (A_y::$_paths as $dir) {
+            foreach (self::$_paths as $dir) {
                 if (is_file($dir.$path)) {
                     $found = $dir.$path;
                     break;
@@ -120,11 +120,11 @@ class A_y
         }
 
         if (!isset($config[$group])) {
-            $config[$group] = A_y::$config->load($group);
+            $config[$group] = self::$config->load($group);
         }
 
         if (isset($path)) {
-            return A_y::path($config[$group], $path);
+            return self::path($config[$group], $path);
         } else {
             return $config[$group];
         }
@@ -141,7 +141,7 @@ class A_y
     {
         $file = str_replace('_', '/', strtolower($class));
 
-        if ($path = A_y::find_file('model', $file)) {
+        if ($path = self::find_file('model', $file)) {
             require $path;
             return TRUE;
         }
@@ -286,7 +286,7 @@ class A_y
 
                 $values = array();
                 foreach ($array as $arr) {
-                    if ($value = A_y::path($arr, implode('.', $keys))) {
+                    if ($value = self::path($arr, implode('.', $keys))) {
                         $values[] = $value;
                     }
                 }

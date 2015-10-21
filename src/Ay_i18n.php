@@ -22,7 +22,7 @@ namespace Utils;
  * @copyright  (c) 2008-2009 Kohana Team
  * @license    http://kohanaphp.com/license
  */
-class ay_i18n
+class Ay_i18n
 {
 
     /**
@@ -50,10 +50,10 @@ class ay_i18n
     {
         if ($lang) {
             // Normalize the language
-            ay_i18n::$lang = strtolower(str_replace(array(' ', '_'), '-', $lang));
+            self::$lang = strtolower(str_replace(array(' ', '_'), '-', $lang));
         }
 
-        return ay_i18n::$lang;
+        return self::$lang;
     }
 
     /**
@@ -67,13 +67,13 @@ class ay_i18n
      */
     public static function get($string)
     {
-        if (!isset(ay_i18n::$_cache[ay_i18n::$lang]) && !isset(ay_i18n::$_cache[ay_i18n::$lang][$string])) {
+        if (!isset(self::$_cache[self::$lang]) && !isset(self::$_cache[self::$lang][$string])) {
 
-            ay_i18n::load($string);
+            self::load($string);
         }
 
         // Return the translated string if it exists
-        return isset(ay_i18n::$_cache[ay_i18n::$lang][$string]) ? ay_i18n::$_cache[ay_i18n::$lang][$string] : $string;
+        return isset(self::$_cache[self::$lang][$string]) ? self::$_cache[self::$lang][$string] : $string;
     }
 
     /**
@@ -87,14 +87,14 @@ class ay_i18n
      */
     public static function load($string)
     {
-        $lang = ay_i18n::$lang;
-        if (isset(ay_i18n::$_cache[ay_i18n::$lang]) && isset(ay_i18n::$_cache[ay_i18n::$lang][$string])) {
-            return ay_i18n::$_cache[ay_i18n::$lang][$string];
+        $lang = self::$lang;
+        if (isset(self::$_cache[self::$lang]) && isset(self::$_cache[self::$lang][$string])) {
+            return self::$_cache[self::$lang][$string];
         }
         // New translation table
         $table = array();
-        if (isset(ay_i18n::$_cache[ay_i18n::$lang])) {
-            $table = ay_i18n::$_cache[ay_i18n::$lang];
+        if (isset(self::$_cache[self::$lang])) {
+            $table = self::$_cache[self::$lang];
         }
         // Split the language: language, region, locale, etc
         $parts = explode('-', $lang);
@@ -114,7 +114,7 @@ class ay_i18n
         } while ($parts);
 
         // Cache the translation table locally
-        return ay_i18n::$_cache[$lang] = $table;
+        return self::$_cache[$lang] = $table;
     }
 
     function __construct()
