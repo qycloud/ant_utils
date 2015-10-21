@@ -55,13 +55,13 @@ class A_y
 
     public static function init()
     {
-        if (a_y::$_init) {
+        if (A_y::$_init) {
             return;
         }
 
         static::$_init = TRUE;
-        static::$log = \Utils\Log\ay_log::instance();
-        static::$config = \Utils\config\ay_config::instance();
+        static::$log = \Utils\Log\Ay_log::instance();
+        static::$config = \Utils\Config\Ay_config::instance();
 
     }
 
@@ -75,7 +75,7 @@ class A_y
         $ext = ($ext === NULL) ? EXT : '.'.$ext;
         $path = $dir.DIRECTORY_SEPARATOR.$file.$ext;
         if ($array OR $dir === 'config' OR $dir === 'i18n') {
-            $paths = a_y::$_paths;
+            $paths = A_y::$_paths;
             $found = array();
             foreach ($paths as $dir) {
                 if (is_file($dir.$path)) {
@@ -84,7 +84,7 @@ class A_y
             }
         } else {
             $found = FALSE;
-            foreach (a_y::$_paths as $dir) {
+            foreach (A_y::$_paths as $dir) {
                 if (is_file($dir.$path)) {
                     $found = $dir.$path;
                     break;
@@ -120,11 +120,11 @@ class A_y
         }
 
         if (!isset($config[$group])) {
-            $config[$group] = a_y::$config->load($group);
+            $config[$group] = A_y::$config->load($group);
         }
 
         if (isset($path)) {
-            return a_y::path($config[$group], $path);
+            return A_y::path($config[$group], $path);
         } else {
             return $config[$group];
         }
@@ -141,7 +141,7 @@ class A_y
     {
         $file = str_replace('_', '/', strtolower($class));
 
-        if ($path = a_y::find_file('model', $file)) {
+        if ($path = A_y::find_file('model', $file)) {
             require $path;
             return TRUE;
         }
@@ -286,7 +286,7 @@ class A_y
 
                 $values = array();
                 foreach ($array as $arr) {
-                    if ($value = a_y::path($arr, implode('.', $keys))) {
+                    if ($value = A_y::path($arr, implode('.', $keys))) {
                         $values[] = $value;
                     }
                 }
