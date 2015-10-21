@@ -10,7 +10,7 @@ namespace Utils\Log;
  * @copyright  (c) 2008-2009 Kohana Team
  * @license    http://kohanaphp.com/license
  */
-abstract class ay_log_writer
+abstract class Ay_log_writer
 {
 
     /**

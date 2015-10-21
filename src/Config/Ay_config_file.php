@@ -1,7 +1,7 @@
 <?php
-namespace Utils\config;
+namespace Utils\Config;
 
-class ay_config_file extends ay_config_reader
+class Ay_config_file extends Ay_config_reader
 {
 
     // Configuration group name
@@ -31,13 +31,13 @@ class ay_config_file extends ay_config_reader
      */
     public function load($group, array $config = NULL)
     {
-        if ($files = \a_y::find_file($this->_directory, $group, NULL, TRUE)) {
+        if ($files = \A_y::find_file($this->_directory, $group, NULL, TRUE)) {
             // Initialize the config array
             $config = array();
 
             foreach ($files as $file) {
                 // Merge each ay_config_file to the configuration array
-                $config = \a_y::merge($config, \a_y::load($file));
+                $config = \A_y::merge($config, \A_y::load($file));
             }
         }
 

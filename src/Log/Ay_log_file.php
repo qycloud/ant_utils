@@ -10,7 +10,7 @@ namespace Utils\Log;
  * @copyright  (c) 2008-2009 Kohana Team
  * @license    http://kohanaphp.com/license
  */
-class ay_log_file extends ay_log_writer
+class Ay_log_file extends Ay_log_writer
 {
 
     // Directory to place log files in

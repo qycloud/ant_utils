@@ -1,5 +1,5 @@
 <?php
-namespace Utils\config;
+namespace Utils\Config;
 
 /**
  * Wrapper for configuration arrays. Multiple configuration readers can be
@@ -11,7 +11,7 @@ namespace Utils\config;
  * @copyright  (c) 2009 Kohana Team
  * @license    http://kohanaphp.com/license
  */
-class ay_config
+class Ay_config
 {
 
     // Singleton static instance

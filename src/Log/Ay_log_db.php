@@ -10,7 +10,7 @@ namespace Utils\Log;
  * @copyright  (c) 2008-2009 Kohana Team
  * @license    http://kohanaphp.com/license
  */
-class ay_Log_Db extends ay_log_writer
+class Ay_Log_Db extends Ay_log_writer
 {
 
     public static $logType = array();

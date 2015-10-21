@@ -11,7 +11,7 @@ namespace Utils\config;
  * @copyright  (c) 2008-2009 Kohana Team
  * @license    http://kohanaphp.com/license
  */
-abstract class ay_config_reader extends \ArrayObject
+abstract class Ay_config_reader extends \ArrayObject
 {
 
     // Configuration group name

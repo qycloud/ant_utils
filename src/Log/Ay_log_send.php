@@ -5,7 +5,7 @@ namespace Utils\Log;
  * log 发送到LOG server
  *
  */
-class ay_Log_Send extends ay_log_writer
+class Ay_Log_Send extends Ay_log_writer
 {
 
     static private $_url = 'http://www.upserver.aysaas.com:30000/log';//http://www.up.com/log

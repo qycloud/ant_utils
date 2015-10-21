@@ -9,7 +9,7 @@ namespace Utils\Log;
  * @copyright  (c) 2010 Kohana Team
  * @license    http://kohanaphp.com/license
  */
-class ay_log_syslog extends ay_log_writer
+class Ay_log_syslog extends Ay_log_writer
 {
 
     // The ay_log_syslog identifier
