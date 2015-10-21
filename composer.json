@@ -16,6 +16,6 @@
         "php":">=5.3.9"
     },
     "autoload": {
-        "psr-4": { "utils\\": "src/" }
+        "psr-4": { "Utils\\": "src/" }
     }
 }
