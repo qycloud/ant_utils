@@ -159,7 +159,7 @@ class A_y
 
         static::$log->add(
             $err['type'],
-            \Utils\Log\ay_Log_Db::$msgTmp,
+            \Utils\Log\Ay_Log_Db::$msgTmp,
             array(
                 ':message' => $err['message'],
                 ':file' => $err['file'],
