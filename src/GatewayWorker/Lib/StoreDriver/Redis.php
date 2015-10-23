@@ -12,6 +12,7 @@
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
 namespace Utils\GatewayWorker\Lib\StoreDriver;
+use Utils\GatewayWorker\Config\Store;
 
 /**
  * Redis
@@ -19,6 +20,12 @@ namespace Utils\GatewayWorker\Lib\StoreDriver;
 
 class Redis extends \Redis
 {
+    public function connect($ip, $port, $timeout)
+    {
+        parent::connect($ip, $port, $timeout);
+        $this->setOption(self::OPT_PREFIX, Store::$pre);
+    }
+
     public function increment($key)
     {
         return parent::incr($key);

@@ -28,4 +28,10 @@ class Config
             sys_get_temp_dir().'/workerman-sender/' :
             $path;
     }
+
+    public function setPre($pre = '')
+    {
+        $pre = $pre.':client:';
+        Store::$pre = $pre;
+    }
 }

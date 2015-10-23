@@ -56,8 +56,8 @@ class Store
         '127.0.0.1:6379',
     );
     
+    public static $pre = '';
+
     // $driver为DRIVER_FILE时要配置此项，实际配置在最下面一行
     public static $storePath = '';
 }
-
-Store::$storePath = sys_get_temp_dir().'/workerman-sender/';
