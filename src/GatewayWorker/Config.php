@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Utils\GatewayWorker;
 use Utils\GatewayWorker\Config\Store;
@@ -17,9 +17,12 @@ class Config
         Store::$driver = $driver;
     }
 
-    public function setGateway($gateway)
+    public function setGateway($gateway, $auth = '')
     {
         Store::$gateway = $gateway;
+        if ($auth) {
+            Store::$auth = $auth;
+        }
     }
 
     public function setStorePath($path = '')

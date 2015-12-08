@@ -24,7 +24,7 @@ class Store
      * @var array
      */
     protected static $instance = array();
-    
+
     /**
      * 获取实例
      * @param string $config_name
@@ -40,7 +40,7 @@ class Store
                 echo "Config\\Store::$config_name not set\n";
                 throw new \Exception("Config\\Store::$config_name not set\n");
             }
-            
+
             if(!isset(self::$instance[$config_name]))
             {
                 if(extension_loaded('Memcached'))
@@ -82,6 +82,9 @@ class Store
                 list($ip, $port) = explode(':', $address);
                 $timeout = 1;
                 self::$instance[$config_name]->connect($ip, $port, $timeout);
+                if (Config\Store::$auth) {
+                    self::$instance[$config_name]->auth(Config\Store::$auth);
+                }
                 self::$instance[$config_name]->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_PHP);
             }else{
                 try{
@@ -100,7 +103,7 @@ class Store
             return self::$instance[$config_name];
         }
         // 文件驱动
-        else 
+        else
         {
             if(!isset(self::$instance[$config_name]))
             {
