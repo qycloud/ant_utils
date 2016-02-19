@@ -22,7 +22,7 @@ use Utils\GatewayWorker\Protocols\GatewayProtocol;
 use Utils\GatewayWorker\Lib\Lock;
 use Utils\GatewayWorker\Lib\Store;
 use Utils\GatewayWorker\Lib\Context;
-use Utils\GatewayWorker\Event;
+use Event;
 
 /**
  * 
