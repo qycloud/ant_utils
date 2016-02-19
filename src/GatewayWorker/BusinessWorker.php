@@ -25,9 +25,9 @@ use Utils\GatewayWorker\Lib\Context;
 use Event;
 
 /**
- * 
+ *
  * BusinessWorker 用于处理Gateway转发来的数据
- * 
+ *
  * @author walkor<walkor@workerman.net>
  *
  */
@@ -38,31 +38,31 @@ class BusinessWorker extends Worker
      * @var int
      */
     const MAX_RETRY_COUNT = 5;
-    
+
     /**
      * 保存与gateway的连接connection对象
      * @var array
      */
     public $gatewayConnections = array();
-    
+
     /**
      * 正在连接的gateway内部通讯地址
      * @var array
      */
     protected $_connectingGatewayAddress = array();
-    
+
     /**
      * 连接失败gateway内部通讯地址
      * @var array
      */
     protected $_badGatewayAddress = array();
-    
+
     /**
      * 保存用户设置的worker启动回调
      * @var callback
      */
     protected $_onWorkerStart = null;
-    
+
     /**
      * 构造函数
      * @param string $socket_name
@@ -74,7 +74,7 @@ class BusinessWorker extends Worker
         $backrace = debug_backtrace();
         $this->_appInitPath = dirname($backrace[0]['file']);
     }
-    
+
     /**
      * 运行
      * @see Workerman.Worker::run()
@@ -85,7 +85,7 @@ class BusinessWorker extends Worker
         $this->onWorkerStart = array($this, 'onWorkerStart');
         parent::run();
     }
-    
+
     /**
      * 当进程启动时一些初始化工作
      * @return void
@@ -104,7 +104,7 @@ class BusinessWorker extends Worker
             call_user_func($this->_onWorkerStart, $this);
         }
     }
-    
+
     /**
      * 当gateway转发来数据时
      * @param TcpConnection $connection
@@ -138,7 +138,7 @@ class BusinessWorker extends Worker
         // 备份一次$data['ext_data']，请求处理完毕后判断session是否和备份相等，不相等就更新session
         $session_str_copy = $data['ext_data'];
         $cmd = $data['cmd'];
-    
+
         // 尝试执行Event::onConnection、Event::onMessage、Event::onClose
         try{
             switch($cmd)
@@ -159,17 +159,17 @@ class BusinessWorker extends Worker
             $msg = 'client_id:'.Context::$client_id."\tclient_ip:".Context::$client_ip."\n".$e->__toString();
             $this->log($msg);
         }
-    
+
         // 判断session是否被更改
         $session_str_now = $_SESSION !== null ? Context::sessionEncode($_SESSION) : '';
         if($session_str_copy != $session_str_now)
         {
-            \GatewayWorker\Lib\Gateway::updateSocketSession(Context::$client_id, $session_str_now);
+            \Utils\GatewayWorker\Lib\Gateway::updateSocketSession(Context::$client_id, $session_str_now);
         }
-    
+
         Context::clear();
     }
-    
+
     /**
      * 当与Gateway的连接断开时触发
      * @param TcpConnection $connection
@@ -212,7 +212,7 @@ class BusinessWorker extends Worker
             }
         }
     }
-    
+
     /**
      * 当连接上gateway的通讯端口时触发
      * 将连接connection对象保存起来
@@ -224,7 +224,7 @@ class BusinessWorker extends Worker
         $this->gatewayConnections[$connection->remoteAddress] = $connection;
         unset($this->_badGatewayAddress[$connection->remoteAddress], $this->_connectingGatewayAddress[$connection->remoteAddress]);
     }
-    
+
     /**
      * 当与gateway的连接出现错误时触发
      * @param TcpConnection $connection
@@ -238,7 +238,7 @@ class BusinessWorker extends Worker
              $this->tryToDeleteGatewayAddress($connection->remoteAddress, $error_msg);
          }
     }
-    
+
     /**
      * 从存储中删除删除连不上的gateway通讯端口
      * @param string $addr
