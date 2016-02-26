@@ -12,7 +12,7 @@
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
 namespace Utils\GatewayWorker\Lib;
-use Utils\Config;
+
 /**
  * 数据库类
  */
@@ -31,16 +31,16 @@ class Db
      */
     public static function instance($config_name)
     {
-        if(!isset(Config\Db::$$config_name))
+        if(!isset(\Config\Db::$$config_name))
         {
-            echo "Config\\Db::$config_name not set\n";
-            throw new \Exception("Config\\Db::$config_name not set\n");
+            echo "\\Config\\Db::$config_name not set\n";
+            throw new \Exception("\\Config\\Db::$config_name not set\n");
         }
         
         if(empty(self::$instance[$config_name]))
         {
-            $config = Config\Db::$$config_name;
-            self::$instance[$config_name] = new \GatewayWorker\Lib\DbConnection($config['host'], $config['port'], $config['user'], $config['password'], $config['dbname']);
+            $config = \Config\Db::$$config_name;
+            self::$instance[$config_name] = new \Utils\GatewayWorker\Lib\DbConnection($config['host'], $config['port'], $config['user'], $config['password'], $config['dbname']);
         }
         return self::$instance[$config_name];
     }
