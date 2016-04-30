@@ -42,7 +42,7 @@ class Ay_Log_Send extends Ay_log_writer
         if (!empty($inItems)) {
             $inItems = array_shift($inItems);
             //post server
-            $curl = new \Lib\Curl();
+            $curl = new \Utils\Curl();
             $result = $curl->post(
                 self::$_url,
                 [
