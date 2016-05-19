@@ -498,7 +498,7 @@ class Pinyin
     {
         // Check if the string can be converted
         if (!$str || !mb_check_encoding($str, 'UTF-8')) {
-            Debug::out('The input string can not be empty and it must be encoded in UTF-8.');
+            \A_y::debug('The input string can not be empty and it must be encoded in UTF-8.');
             return '';
         }
         // Md5 encode it
