@@ -30,6 +30,14 @@ class DateTimeRange extends \Model\Base
         return $this->thisWeek();
     }
 
+    public function thisYear()
+    {
+        return array(
+            'start' => $this->_carbon->startOfYear()->startOfDay()->toDateTimeString(),
+            'end' => $this->_carbon->endOfYear()->endOfDay()->toDateTimeString()
+        );
+    }
+
     public function thisDay()
     {
         return array(
