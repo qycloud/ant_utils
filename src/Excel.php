@@ -54,25 +54,29 @@ class Excel
             $sheetData = $sheet->toArray();
 
             $dataCount = count($sheetData);
-            if ($dataCount <= 1) {
+            if ($dataCount <= 2) {
                 continue;
             }
 
             $fields = array();
             $dataSet = array();
             foreach ($sheetData as $rowIndex => $rowData) {
+                if ($rowIndex == 0) {
+                    $title = trim($rowData[0]);
+                    continue;
+                }
                 foreach ($rowData as $cellIndex => $cellValue) {
-                    if ($rowIndex == 0) {
+                    if ($rowIndex == 1) {
                         $fields[$cellIndex] = $cellValue;
                     } else {
-                        if (!isset($dataSet[$rowIndex - 1])) {
-                            $dataSet[$rowIndex - 1] = array();
+                        if (!isset($dataSet[$rowIndex - 2])) {
+                            $dataSet[$rowIndex - 2] = array();
                         }
-                        $dataSet[$rowIndex - 1][$fields[$cellIndex]] = $rowData[$cellIndex];
+                        $dataSet[$rowIndex - 2][$fields[$cellIndex]] = $rowData[$cellIndex];
                     }
                 }
             }
-            $title = trim($sheet->getTitle());
+
             $allData[$title] = $dataSet;
         }
 
