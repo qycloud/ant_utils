@@ -23,19 +23,10 @@ class DateTimeRange extends \Model\Base
         return $this;
     }
 
-
-    public function lastWeek()
+    public function yesterday()
     {
-        $this->_carbon->subWeek();
-        return $this->thisWeek();
-    }
-
-    public function thisYear()
-    {
-        return array(
-            'start' => $this->_carbon->startOfYear()->startOfDay()->toDateTimeString(),
-            'end' => $this->_carbon->endOfYear()->endOfDay()->toDateTimeString()
-        );
+        $this->_carbon->subDay();
+        return $this->thisDay();
     }
 
     public function thisDay()
@@ -44,6 +35,12 @@ class DateTimeRange extends \Model\Base
             'start' => $this->_carbon->startOfDay()->toDateTimeString(),
             'end' => $this->_carbon->endOfDay()->toDateTimeString()
         );
+    }
+
+    public function lastWeek()
+    {
+        $this->_carbon->subWeek();
+        return $this->thisWeek();
     }
 
     public function thisWeek()
@@ -72,6 +69,11 @@ class DateTimeRange extends \Model\Base
         );
     }
 
+    public function lastQuarter()
+    {
+        $this->_carbon->subQuarter();
+        return $this->thisQuarter();
+    }
     public function thisQuarter()
     {
         if ($this->_carbon->quarter == 1) {
@@ -102,6 +104,19 @@ class DateTimeRange extends \Model\Base
         );
     }
 
+    public function lastYear()
+    {
+        $this->_carbon->subYear();
+        return $this->thisYear();
+    }
+
+    public function thisYear()
+    {
+        return array(
+            'start' => $this->_carbon->startOfYear()->startOfDay()->toDateTimeString(),
+            'end' => $this->_carbon->endOfYear()->endOfDay()->toDateTimeString()
+        );
+    }
     public function oneYear()
     {
         return array(
