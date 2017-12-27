@@ -119,7 +119,7 @@ class Excel
                $exportExtendInstance->createSheet();
             }
             $sheet = $exportExtendInstance->getSheet($sheetIndex);
-            $sheet->setTitle($tabTitle);
+            $sheet->setTitle((string) $tabTitle);
 
             foreach ($tableData as $recordData) {
                 $colCount = 1;
