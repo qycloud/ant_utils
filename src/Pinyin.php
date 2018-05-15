@@ -479,7 +479,7 @@ class Pinyin
      */
     static function rawConvByUtf8($str, $upCase = false)
     {
-        return self::rawConvByGb2312(iconv('UTF-8', 'GBK', $str), $upCase);
+        return self::rawConvByGb2312(iconv('UTF-8', 'GBK//IGNORE', $str), $upCase);
     }
 
 
