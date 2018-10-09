@@ -425,7 +425,7 @@ class Pinyin
      * @param  boolean $upCase
      * @return string
      */
-    static function getPinYinByGb2312($intCode, $upCase = false)
+    static function getPinYinByGb2312($intCode, $str, $upCase = false)
     {
         // If it's a english characters, restore it
         if ($intCode > 0 && $intCode < 160) {
@@ -442,7 +442,11 @@ class Pinyin
             }
         // Anything else, return empty
         } else {
-            return '';
+            $data = '';
+            if (class_exists('\Core\Utils\PinYin\PinYin')) {
+                $data = \Core\Utils\PinYin\PinYin::conv(iconv('GBK', 'UTF-8//IGNORE', $str));
+            }
+            return $data;
         }
     }
 
@@ -459,12 +463,15 @@ class Pinyin
         $result = '';
         $length = strlen($str);
         for ($i = 0; $i < $length; $i++) {
-            $intX = ord(substr($str, $i, 1));
+            $left = substr($str, $i, 1);
+            $right = '';
+            $intX = ord($left);
             if ($intX > 160) {
-                $intY = ord(substr($str, ++$i, 1));
+                $right = substr($str, ++$i, 1);
+                $intY = ord($right);
                 $intX = $intX * 256 + $intY - 65536;
             }
-            $result .= self::getPinYinByGb2312($intX, $upCase);
+            $result .= self::getPinYinByGb2312($intX, $left.$right, $upCase);
         }
         return $result;
     }
