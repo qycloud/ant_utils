@@ -442,11 +442,7 @@ class Pinyin
             }
         // Anything else, return empty
         } else {
-            $data = '';
-            if (class_exists('\Core\Utils\PinYin\PinYin')) {
-                $data = \Core\Utils\PinYin\PinYin::conv(iconv('GBK', 'UTF-8//IGNORE', $str));
-            }
-            return $data;
+            return PinYin\PinYin::conv(iconv('GBK', 'UTF-8//IGNORE', $str));
         }
     }
 
