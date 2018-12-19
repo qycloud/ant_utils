@@ -151,24 +151,24 @@ class Ay_log
         // Reset the messages array
         $this->_messages = array();
 
-        foreach ($this->_writers as $writer) {
-            if (empty($writer['types'])) {
-                // Write all of the messages
-                $writer['object']->write($messages);
-            } else {
-                // Filtered messages
-                $filtered = array();
+        $writer = current($this->_writers);
 
-                foreach ($messages as $message) {
-                    if (in_array($message['type'], $writer['types'])) {
-                        // Writer accepts this kind of message
-                        $filtered[] = $message;
-                    }
+        if (empty($writer['types'])) {
+            // Write all of the messages
+            $writer['object']->write($messages);
+        } else {
+            // Filtered messages
+            $filtered = array();
+
+            foreach ($messages as $message) {
+                if (in_array($message['type'], $writer['types'])) {
+                    // Writer accepts this kind of message
+                    $filtered[] = $message;
                 }
-
-                // Write the filtered messages
-                $writer['object']->write($filtered);
             }
+
+            // Write the filtered messages
+            $writer['object']->write($filtered);
         }
     }
 
