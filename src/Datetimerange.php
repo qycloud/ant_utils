@@ -10,7 +10,7 @@
 namespace Utils;
 use \Carbon\Carbon;
 
-class DateTimeRange extends \Model\Base
+class DateTimeRange extends Singleton
 {
     private $_carbon;
 
